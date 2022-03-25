@@ -14,7 +14,7 @@ const REPORT = 'report';
 function getInputs() {
     const inputs = {
         sensitivityLevel: core.getInput('sensitivity-level'),
-        production: core.getInput('production')
+        production: core.getInput('production') === 'true'
     };
 
     console.log(`Running with inputs: ${JSON.stringify(inputs)}`);
@@ -24,8 +24,8 @@ function getInputs() {
 function getReport(production) {
     console.log(`Running 'npm audit' command with production flag ${production ? 'on' : 'off'}...`);
     return new Promise((resolve, reject) => {
-        exec(`npm audit --registry=https://registry.npmjs.org --json ${production ? '--production' : ''}`, (error, stdout, stderr) => {
-            if (error) {
+        exec(`npm audit --registry=https://registry.npmjs.org --json ${production ? '--production' : ''}`, (error, stdout) => {
+            if (!stdout) {
                 return reject(error);
             }
 
