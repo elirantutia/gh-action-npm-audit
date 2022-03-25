@@ -7,7 +7,7 @@ const REPORT = 'report';
 function getReport() {
     console.log('Running `npm audit` command...');
     return new Promise((resolve, reject) => {
-        exec("npm audit --registry=https://registry.npmjs.org --json", (error, stdout, stderr) => {
+        exec("npm audit --registry=https://registry.npmjs.org --json --production", (error, stdout, stderr) => {
             console.log(`Command result:\n${stdout}`);
             resolve(JSON.parse(stdout));
         });
@@ -28,7 +28,7 @@ function isVulnerabilityExists(report, sensitivityLevel = 'moderate') {
 }
 
 function getOutputReport(report) {
-    return 'Please fix it.';
+    return 'There is at least 1 vulnerability in the repo, please fix it.';
 }
 
 (async function run() {
@@ -37,11 +37,12 @@ function getOutputReport(report) {
 
     const report = await getReport();
     if (!isVulnerabilityExists(report, sensitivityLevel)) {
-        console.log('all good');
+        console.log('All good :)');
         core.setOutput(FOUND, false);
         return;
     }
 
+    console.log("Found vulnerabilities :(")
     core.setOutput(FOUND, true);
     core.setOutput(REPORT, getOutputReport(report))
 })();
