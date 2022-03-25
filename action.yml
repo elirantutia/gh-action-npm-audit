@@ -1,0 +1,10 @@
+name: 'NPM Audit'
+description: ''
+inputs:
+  sensitivity-level:
+    description: 'Sensitivity level of the security audit'
+    required: false
+    default: 'moderate'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

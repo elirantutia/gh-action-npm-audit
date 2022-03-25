@@ -1,0 +1,14 @@
+{
+  "name": "gh-action-npm-audit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build index.js --license licenses.txt"
+  },
+  "dependencies": {
+    "@actions/core": "^1.6.0"
+  },
+  "author": "Eliran Tutia",
+  "license": "ISC"
+}
