@@ -1734,7 +1734,14 @@ function isVulnerabilityExists(report, sensitivityLevel = 'moderate') {
 }
 
 function getOutputReport(report) {
-    return 'There is at least 1 vulnerability in the repo, please fix it.';
+    const totalVulnerabilities = Object.values(report.metadata.vulnerabilities)
+        .reduce((counter, vulnerabilities) => counter + vulnerabilities, 0);
+
+    const modulesInRisk = report.actions.map(action => action.module);
+
+    return `Found ${totalVulnerabilities} vulnerabilities (${report.metadata.vulnerabilities.low} low, ${report.metadata.vulnerabilities.moderate} moderate, ${report.metadata.vulnerabilities.high} high, ${report.metadata.vulnerabilities.moderate.critical} critical) in ${report.metadata.totalDependencies} scanned packages.
+    ** Modules **
+    ${modulesInRisk.join(',')}`;
 }
 
 (async function run() {
