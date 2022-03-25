@@ -5,6 +5,10 @@ inputs:
     description: 'Sensitivity level of the security audit'
     required: false
     default: 'moderate'
+  production:
+    description: 'Execute npm audit with production flag'
+    required: false
+    default: 'true'
 runs:
   using: 'node16'
   main: 'dist/index.js'
