@@ -4,7 +4,7 @@ inputs:
   sensitivity-level:
     description: 'Sensitivity level of the security audit'
     required: false
-    default: 'moderate'
+    default: 'low'
   production:
     description: 'Execute npm audit with production flag'
     required: false

@@ -12,10 +12,13 @@ const FOUND = 'found';
 const REPORT = 'report';
 
 function getInputs() {
-    return {
+    const inputs = {
         sensitivityLevel: core.getInput('sensitivity-level'),
         production: core.getInput('production')
-    }
+    };
+
+    console.log(`Running with inputs: ${JSON.stringify(inputs)}`);
+    return inputs;
 }
 
 function getReport(production) {
